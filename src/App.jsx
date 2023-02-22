@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/admin" element={<Index />} /> 
+          <Route path="/" element={<Index />} /> 
           <Route path="/admin_sucursal" element={<SucursalAdmin />}/>
         </Routes>
       </Router>
