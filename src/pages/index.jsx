@@ -26,6 +26,7 @@ function Index() {
                     <h1 class="title self-center text-white">ViajaYa</h1>
                 </div>
                 <div className='flex flex-row'>
+                    <a href="#" className='bg-blue-900 font-semibold self-center p-5 hover:bg-blue-900 text-white'>Inicio</a>
                     <a href="#" className='self-center p-5 hover:bg-blue-900 text-white'>Sucursales</a>
                     <a href="#" className='self-center p-5 hover:bg-blue-900 text-white'>Hoteles</a>
                     <a href="#" className='self-center p-5 hover:bg-blue-900 text-white'>Administradores</a>
