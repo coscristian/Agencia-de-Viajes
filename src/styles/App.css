@@ -2,45 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: auto;
-  background-color: #003580;
-  color: white;
-  display:flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-li a{
-  text-decoration: none;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 15px;
-
-}
-
-li a:hover {
-  background-color: #064BB7;
-  border-radius: 20px;
-}
-
-.logo {
-  width:50px;
-}
 
 .title {
   font-family: 'Kalam', cursive;
   font-size: x-large;
 }
 
-.admin-icon {
-  width: 50px;
-  height: 45px;
-}
 
