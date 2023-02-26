@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .title {
   font-family: 'Kalam', cursive;
   font-size: x-large;

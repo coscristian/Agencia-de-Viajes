@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 
 function Index() {
     return (
@@ -5,7 +6,9 @@ function Index() {
             <div className='flex flex-row bg-blue-900'>
                 <div className='flex flex-col text-white py-3   bg-blue-800 border-r-2 h-screen'>
                     <ul>
-                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Sucursales</li>
+                        <Link to="/sucursales">
+                            <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Sucursales</li>
+                        </Link>
                         <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Hoteles</li>
                         <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Administradores</li>
                         <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Vendedores</li>
