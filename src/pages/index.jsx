@@ -1,6 +1,4 @@
 import airplane from 'media/airplane.png';
-import adminIcon from 'media/admin_icon.webp';
-import sucursal from 'media/sucursal.svg';
 
 function Index() {
     return (
@@ -16,17 +14,17 @@ function Index() {
                 </div>
             </header>
             <div className='flex flex-row bg-blue-900'>
-                <div className='flex flex-col text-white py-3 pl-6 pr-14 bg-blue-800 border-r-2 h-screen'>
+                <div className='flex flex-col text-white py-3   bg-blue-800 border-r-2 h-screen'>
                     <ul>
-                        <li className='py-2'>Sucursales</li>
-                        <li className='py-2'>Hoteles</li>
-                        <li className='py-2'>Administradores</li>
-                        <li className='py-2'>Vendedores</li>
-                        <li className='py-2'>Clientes</li>
+                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Sucursales</li>
+                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Hoteles</li>
+                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Administradores</li>
+                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Vendedores</li>
+                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Clientes</li>
                         <hr></hr>
-                        <li className='py-2'>Docs</li>
-                        <li className='py-2'>Lorem</li>
-                        <li className='py-2'>Ayuda</li>
+                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Docs</li>
+                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Lorem</li>
+                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Ayuda</li>
                     </ul>
                 </div>
                 <div className='grid grid-cols-3 w-full py-4 px-4 gap-2 text-center'>
