@@ -1,10 +1,13 @@
 import airplane from 'media/airplane.png';
+import {Link} from "react-router-dom";
 
 const NavBar = () => {
   return (
     <header className="bg-blue-800 flex flex-row justify-between border-b-2">
       <div className="flex flex-row">
+        <Link to="/">
         <img className="w-16 ml-4 mr-2" src={airplane} alt="Logo ViajaYa" />
+        </Link>
         <h1 class="title self-center text-white">ViajaYa</h1>
       </div>
       <div className="flex flex-row px-4 hover:bg-blue-900">
