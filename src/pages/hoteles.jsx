@@ -18,7 +18,6 @@ const Hoteles = () => {
                 <SucursalCard titulo="Pereira" img={hotel} etiqueta1="Risaralda" etiqueta2="Cafetero"/>
                 <SucursalCard titulo="Cali" img={hotel2} etiqueta1="Feria" etiqueta2="Valle"/>
                 <SucursalCard titulo="Pereira" img={hotel} etiqueta1="Risaralda" etiqueta2="Cafetero"/>
-
             </div>
         </div>            
     </div>
