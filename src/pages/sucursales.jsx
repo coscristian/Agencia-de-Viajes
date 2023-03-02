@@ -7,8 +7,8 @@ function Sucursales() {
     return (
         <div className='flex flex-row bg-gray-100'>
             <Sidebar>
-                <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Filtrar por</li>
-                <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Ordenar por</li>
+                <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Filter by</li>
+                <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Order By</li>
             </Sidebar>
             <div className="flex flex-col mx-5 my-5 w-full">
                 <h2 className="text-2xl font-sans font-bold">Sucursales Disponibles</h2>

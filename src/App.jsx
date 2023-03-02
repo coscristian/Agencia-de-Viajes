@@ -6,6 +6,7 @@ import Sucursales from 'pages/sucursales';
 import Hoteles from 'pages/hoteles';
 import Admins from 'pages/admins';
 import Sellers from 'pages/sellers';
+import Customers from 'pages/customers';
 import {
   BrowserRouter as Router,
   Route,
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/hoteles" element={<Hoteles />}/>
                 <Route path="/admins" element={<Admins />}/>
                 <Route path="/sellers" element={<Sellers />}/>
+                <Route path="/customers" element={<Customers />}/>
             </Route> 
             
             <Route path="/admin_sucursal" element={<SucursalAdmin />}/>

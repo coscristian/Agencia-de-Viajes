@@ -19,7 +19,9 @@ function Index() {
                         <Link to="/sellers">
                             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Vendedores</li>
                         </Link>
-                        <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Clientes</li>
+                        <Link to="/customers">
+                            <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Clientes</li>
+                        </Link>
                     </Sidebar>
                 </div>
                 <div className='grid grid-cols-3 w-full py-4 px-4 gap-2 text-center'>
