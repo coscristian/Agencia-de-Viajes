@@ -1,12 +1,13 @@
+import { Outlet } from "react-router-dom";
+
 const { default: NavBar } = require("components/NavBar")
 
 
-const Layout = ({children}) => {
+const Layout = () => {
     return (
         <div>
-            Initial Layout
             <NavBar />
-            <main>{children}</main>
+            <main><Outlet /></main>
         </div>
     );
 }

@@ -14,13 +14,14 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Layout>
           <Routes>
-            <Route path="/" element={<Index />} /> 
-            <Route path="/sucursales" element={<Sucursales />}/>
+            <Route path="/" element={<Layout />}>
+                <Route path='/' element={<Index />} />
+                <Route path="/sucursales" element={<Sucursales />}/>
+            </Route> 
+            
             <Route path="/admin_sucursal" element={<SucursalAdmin />}/>
-          </Routes>
-        </Layout>
+          </Routes>        
       </Router>
     </div>
   );
