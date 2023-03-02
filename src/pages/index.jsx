@@ -10,7 +10,7 @@ function Index() {
                         <Link to="/sucursales">
                             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Sucursales</li>
                         </Link>
-                        <Link to="/hoteles">
+                        <Link to="/hotels">
                             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Hoteles</li>
                         </Link>
                         <Link to="/admins">

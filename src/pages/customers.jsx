@@ -13,7 +13,7 @@ const Customers = () => {
             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Filter by</li>
             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Order by</li>
         </Sidebar>
-        <div className="flex flex-col mx-5 my-5 w-full">
+        <div className="flex flex-col my-5 w-full justify-center items-center">
             <h2 className="text-2xl font-sans font-bold">Available Customers</h2>
             <div className="grid grid-cols-3 gap-2">
                 <SucursalCard titulo="Camilo Perez" img={admin4} etiqueta1="Bogotá" etiqueta2="Cundinamarca"/>

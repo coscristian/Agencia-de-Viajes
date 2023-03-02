@@ -3,7 +3,7 @@ import Index from 'pages/index'
 import SucursalAdmin from 'pages/sucursal_admin';
 import Layout from 'layouts/Layout';
 import Sucursales from 'pages/sucursales';
-import Hoteles from 'pages/hoteles';
+import Hotels from 'pages/hotels';
 import Admins from 'pages/admins';
 import Sellers from 'pages/sellers';
 import Customers from 'pages/customers';
@@ -22,7 +22,7 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route path='/' element={<Index />} />
                 <Route path="/sucursales" element={<Sucursales />}/>
-                <Route path="/hoteles" element={<Hoteles />}/>
+                <Route path="/hotels" element={<Hotels />}/>
                 <Route path="/admins" element={<Admins />}/>
                 <Route path="/sellers" element={<Sellers />}/>
                 <Route path="/customers" element={<Customers />}/>

@@ -13,13 +13,18 @@ const Admins = () => {
             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Filter by</li>
             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Order by</li>
         </Sidebar>
-        <div className="flex flex-col mx-5 my-5 w-full">
-            <h2 className="text-2xl font-sans font-bold">Available Admins</h2>
+        <div className="flex flex-col my-5 w-full justify-center items-center">
+            <h2 className="text-2xl my-5 font-sans font-bold">Available Admins</h2>
             <div className="grid grid-cols-3 gap-2">
                 <SucursalCard titulo="Juan Carlos Ramirez" img={admin2} etiqueta1="Pereira" etiqueta2="Risaralda"/>
                 <SucursalCard titulo="Andrea Gallardo" img={admin1} etiqueta1="Medellín" etiqueta2="Antioquía"/>
                 <SucursalCard titulo="Camilo Perez" img={admin4} etiqueta1="Bogotá" etiqueta2="Cundinamarca"/>
                 <SucursalCard titulo="Camila Montoya" img={admin3} etiqueta1="Villavicencio" etiqueta2="Meta"/>
+                <SucursalCard titulo="Camila Montoya" img={admin3} etiqueta1="Villavicencio" etiqueta2="Meta"/>
+                <SucursalCard titulo="Camila Montoya" img={admin3} etiqueta1="Villavicencio" etiqueta2="Meta"/>
+                <SucursalCard titulo="Camila Montoya" img={admin3} etiqueta1="Villavicencio" etiqueta2="Meta"/>
+
+
             </div>
         </div>            
     </div>
