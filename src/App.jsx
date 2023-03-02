@@ -8,6 +8,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import Hoteles from 'pages/hoteles';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route path='/' element={<Index />} />
                 <Route path="/sucursales" element={<Sucursales />}/>
+                <Route path="/hoteles" element={<Hoteles />}/>
             </Route> 
             
             <Route path="/admin_sucursal" element={<SucursalAdmin />}/>
