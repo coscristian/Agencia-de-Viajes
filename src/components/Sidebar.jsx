@@ -1,6 +1,6 @@
 const Sidebar = ({children}) => {
     return (    
-        <div className='flex flex-col text-white py-3   bg-blue-800 border-r-2 h-screen'>
+        <div className='flex flex-col text-white py-3 bg-blue-800 border-r-2'>
             <ul>
                 {children}
                 <hr></hr>
