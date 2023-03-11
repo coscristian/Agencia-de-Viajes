@@ -4,7 +4,7 @@ import deleteImg from "media/delete.png";
 const SucursalCard = (props) => {
     return (
         <div className="max-w-sm shadow-lg rounded">
-            <img className="w-full" src={props.img} />            
+            <img className="h-60 w-full" src={props.img} />            
             <div className="flex text-left text-gray-700 font-semibold text-xl px-6 pt-4">
                 <h2 className="">{props.titulo}</h2>
                 <button type="button" class="mx-3 p-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -22,5 +22,6 @@ const SucursalCard = (props) => {
         </div>
     );
 }
+
 
 export default SucursalCard;
