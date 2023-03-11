@@ -7,6 +7,7 @@ import Hotels from 'pages/hotels';
 import Admins from 'pages/admins';
 import Sellers from 'pages/sellers';
 import Customers from 'pages/customers';
+import Profile from 'layouts/Profile'
 import {
   BrowserRouter as Router,
   Route,
@@ -26,9 +27,11 @@ function App() {
                 <Route path="/admins" element={<Admins />}/>
                 <Route path="/sellers" element={<Sellers />}/>
                 <Route path="/customers" element={<Customers />}/>
+                <Route path="/profile" element={<Profile/>}/>
             </Route> 
             
             <Route path="/admin_sucursal" element={<SucursalAdmin />}/>
+            
           </Routes>        
       </Router>
     </div>

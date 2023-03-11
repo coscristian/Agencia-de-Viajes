@@ -23,8 +23,6 @@ const Admins = () => {
                 <SucursalCard titulo="Camila Montoya" img={admin3} etiqueta1="Villavicencio" etiqueta2="Meta"/>
                 <SucursalCard titulo="Camila Montoya" img={admin3} etiqueta1="Villavicencio" etiqueta2="Meta"/>
                 <SucursalCard titulo="Camila Montoya" img={admin3} etiqueta1="Villavicencio" etiqueta2="Meta"/>
-
-
             </div>
         </div>            
     </div>

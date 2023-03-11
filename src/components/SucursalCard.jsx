@@ -23,5 +23,4 @@ const SucursalCard = (props) => {
     );
 }
 
-
 export default SucursalCard;
