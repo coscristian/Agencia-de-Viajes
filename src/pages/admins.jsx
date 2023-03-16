@@ -5,7 +5,7 @@ import admin3 from 'media/admin3.jpeg';
 import admin4 from 'media/admin4.jpg';
 import SucursalCard from 'components/SucursalCard';
 import Sidebar from 'components/Sidebar';
-import Profile from 'pages/profile';
+
 import {
   Link, Outlet
 } from "react-router-dom";

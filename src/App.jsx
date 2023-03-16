@@ -14,6 +14,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import PrivateLayout from 'layouts/PrivateLayout';
 
 
 function App() {
@@ -21,20 +22,18 @@ function App() {
     <div className="App">
       <Router>
           <Routes>
-
-            <Route path="/" element={<Layout />}>
-                <Route path='/' element={<Index />} />
-                <Route path="/sucursales" element={<Sucursales />}/>
-                <Route path="/hotels" element={<Hotels />}/>
-                <Route path="admins" element={<Outlet />} > 
-                  <Route index element={<Admins/>}/> 
-                  <Route path="profile" element={<Profile/>}/> 
+            <Route path="/admin" element={<PrivateLayout />}>
+                <Route path='/admin' element={<Index />} />
+                <Route path="suc_admins" element={<Admins />}>
+                  <Route path="profile" element={<Profile />}/>  
                 </Route>
-                <Route path="/sellers" element={<Sellers />}/>
-                <Route path="/customers" element={<Customers />}/>
-                
+                <Route path="sucursales" element={<Sucursales />}/>
+                <Route path="hotels" element={<Hotels />}/>
+                <Route path="sellers" element={<Sellers />}/>
+                <Route path="customers" element={<Customers />}/>     
+                            
             </Route> 
-
+            
             <Route path="/admin_sucursal" element={<SucursalAdmin />}/>
             
           </Routes>        
@@ -44,3 +43,11 @@ function App() {
 }
 
 export default App;
+
+/**
+ * 
+ *             <Route path="/admin" element={<PrivateLayout />} > 
+                  <Route index element={<Admins/>}/> 
+                  <Route path="profile" element={<Profile/>}/> 
+            </Route>
+ */

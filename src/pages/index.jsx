@@ -7,19 +7,19 @@ function Index() {
             <div className='flex flex-row bg-blue-900'>
                 <div className='flex flex-col text-white py-3   bg-blue-800 border-r-2 h-screen'>
                     <Sidebar>
-                        <Link to="/sucursales">
+                        <Link to="sucursales">
                             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Sucursales</li>
                         </Link>
-                        <Link to="/hotels">
+                        <Link to="hotels">
                             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Hoteles</li>
                         </Link>
-                        <Link to="/admins">
+                        <Link to="suc_admins">
                             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Administradores</li>
                         </Link>
-                        <Link to="/sellers">
+                        <Link to="sellers">
                             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Vendedores</li>
                         </Link>
-                        <Link to="/customers">
+                        <Link to="customers">
                             <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Clientes</li>
                         </Link>
                     </Sidebar>
