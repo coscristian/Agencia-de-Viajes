@@ -90,16 +90,32 @@ const Admins = () => {
         {showTable ? (
           <SucursalAdminsTable adminsList={admins} />
         ) : (
-          <FormCreateAdmin />
+          <FormCreateAdmin adminsList={admins} setShowTable={setShowTable} setAdmins={setAdmins}/>
         )}
       </div>
     </div>
   );
 };
 
-const FormCreateAdmin = () => {
+const FormCreateAdmin = ({adminsList, setShowTable, setAdmins}) => {
+
+  const form = useRef(null);
+
+  const submitCreateAdminForm = (e) => {
+    e.preventDefault();
+    const fd = new FormData(form.current);
+    const newAdmin = {};
+
+    fd.forEach((value, key) => {
+      newAdmin[key] = value;
+    });
+    
+    setShowTable(true);
+    setAdmins([...adminsList, newAdmin]);
+  }
+
   return (
-    <form>
+    <form ref={form} onSubmit={submitCreateAdminForm}>
       <div class="grid md:grid-cols-2 md:gap-6">
         <div class="relative z-0 w-full mb-6 group">
           <input
@@ -158,8 +174,8 @@ const FormCreateAdmin = () => {
             <option disabled value={0}>
               Select an option
             </option>
-            <option>M</option>
-            <option>F</option>
+            <option>Masculino</option>
+            <option>Femenino</option>
           </select>
           <label
             for="gender"
@@ -172,16 +188,31 @@ const FormCreateAdmin = () => {
       <div class="relative z-0 w-full mb-6 group">
         <input
           type="email"
-          name="floating_email"
+          name="email"
           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
         <label
-          for="floating_email"
+          for="email"
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Email
+        </label>
+      </div>
+      <div class="relative z-0 w-full mb-6 group">
+        <input
+          type="text"
+          name="address"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+          required
+        />
+        <label
+          for="address"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >
+          Address
         </label>
       </div>
       <div class="relative z-0 w-full mb-6 group">
@@ -223,10 +254,10 @@ const SucursalAdminsTable = ({ adminsList }) => {
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-3">
-              F Name
+              Name
             </th>
             <th scope="col" class="px-6 py-3">
-              L Name
+              Last Name
             </th>
             <th scope="col" class="px-6 py-3">
               Gender
@@ -255,11 +286,11 @@ const SucursalAdminsTable = ({ adminsList }) => {
                 >
                   {admin.name}
                 </th>
-                <td class="px-6 py-4">{admin.lastName}</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{admin.lastName}</td>
                 <td class="px-6 py-4">{admin.gender}</td>
                 <td class="px-6 py-4">{admin.address}</td>
                 <td class="px-6 py-4">{admin.email}</td>
-                <td class="px-6 py-4">{admin.sucursal}</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{admin.sucursal}</td>
                 <td class="px-6 py-4 text-right">
                   <a
                     href="#"
