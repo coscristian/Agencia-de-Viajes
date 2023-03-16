@@ -9,6 +9,7 @@ import { Link, Outlet } from "react-router-dom";
 
 const backendData = [
   {
+    id: "1297685647",
     name: "Juan Carlos",
     lastName: "Ramirez",
     gender: "Masculino",
@@ -17,6 +18,7 @@ const backendData = [
     sucursal: "Pereira",
   },
   {
+    id: "2787585646",
     name: "Sebastian",
     lastName: "Mena Quezada",
     gender: "Masculino",
@@ -25,6 +27,7 @@ const backendData = [
     sucursal: "Medellín",
   },
   {
+    id: "1498685647",
     name: "Yuldavis",
     lastName: "Cossio Perea",
     gender: "Femenino",
@@ -33,6 +36,7 @@ const backendData = [
     sucursal: "Bogotá",
   },
   {
+    id: "1497685647",
     name: "Juan José",
     lastName: "Quesada Cossio",
     gender: "Masculino",
@@ -90,15 +94,18 @@ const Admins = () => {
         {showTable ? (
           <SucursalAdminsTable adminsList={admins} />
         ) : (
-          <FormCreateAdmin adminsList={admins} setShowTable={setShowTable} setAdmins={setAdmins}/>
+          <FormCreateAdmin
+            adminsList={admins}
+            setShowTable={setShowTable}
+            setAdmins={setAdmins}
+          />
         )}
       </div>
     </div>
   );
 };
 
-const FormCreateAdmin = ({adminsList, setShowTable, setAdmins}) => {
-
+const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins }) => {
   const form = useRef(null);
 
   const submitCreateAdminForm = (e) => {
@@ -109,14 +116,29 @@ const FormCreateAdmin = ({adminsList, setShowTable, setAdmins}) => {
     fd.forEach((value, key) => {
       newAdmin[key] = value;
     });
-    
+
     setShowTable(true);
     setAdmins([...adminsList, newAdmin]);
-  }
+  };
 
   return (
     <form ref={form} onSubmit={submitCreateAdminForm}>
       <div class="grid md:grid-cols-2 md:gap-6">
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="text"
+            name="id"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            required
+          />
+          <label
+            for="id"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >
+            ID
+          </label>
+        </div>
         <div class="relative z-0 w-full mb-6 group">
           <input
             type="text"
@@ -147,23 +169,6 @@ const FormCreateAdmin = ({adminsList, setShowTable, setAdmins}) => {
             Last name
           </label>
         </div>
-      </div>
-      <div class="grid md:grid-cols-2 md:gap-6">
-        <div class="relative z-0 w-full mb-6 group">
-          <input
-            type="tel"
-            name="phoneNumber"
-            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            required
-          />
-          <label
-            for="phoneNumber"
-            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Phone number (3207101556)
-          </label>
-        </div>
         <div class="relative z-0 w-full mb-6 group">
           <select
             name="gender"
@@ -185,6 +190,21 @@ const FormCreateAdmin = ({adminsList, setShowTable, setAdmins}) => {
           </label>
         </div>
       </div>
+      <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="tel"
+            name="phoneNumber"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            required
+          />
+          <label
+            for="phoneNumber"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >
+            Phone number (3207101556)
+          </label>
+        </div>
       <div class="relative z-0 w-full mb-6 group">
         <input
           type="email"
@@ -254,6 +274,9 @@ const SucursalAdminsTable = ({ adminsList }) => {
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-3">
+              ID
+            </th>
+            <th scope="col" class="px-6 py-3">
               Name
             </th>
             <th scope="col" class="px-6 py-3">
@@ -284,13 +307,18 @@ const SucursalAdminsTable = ({ adminsList }) => {
                   scope="row"
                   class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {admin.name}
+                  {admin.id}
                 </th>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{admin.lastName}</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {admin.name}
+                </td>
+                <td class="px-6 py-4">{admin.lastName}</td>
                 <td class="px-6 py-4">{admin.gender}</td>
                 <td class="px-6 py-4">{admin.address}</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {admin.sucursal}
+                </td>
                 <td class="px-6 py-4">{admin.email}</td>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{admin.sucursal}</td>
                 <td class="px-6 py-4 text-right">
                   <a
                     href="#"
