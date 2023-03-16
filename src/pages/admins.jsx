@@ -50,8 +50,18 @@ const Admins = () => {
   const [showTable, setShowTable] = useState(true);
   const [titleText, setTitleText] = useState("Available Sucursal Admins");
   const [buttonText, setButtonText] = useState("Add Admin");
-
+  const [editAdminInfo, setEditAdminInfo] = useState(false);
   const [admins, setAdmins] = useState([]);
+  const [idAdmin, setIdAdmin] = useState(0);
+  const [submitInfoText, setSubmitInfoText] = useState("Create Suc Admin");
+
+  useEffect(()=>{
+    if(editAdminInfo){
+      setSubmitInfoText("Update Suc Admin");
+    }else{
+      setSubmitInfoText("Create Suc Admin");
+    }
+  },[editAdminInfo]);
 
   useEffect(() => {
     setAdmins(backendData);
@@ -61,6 +71,7 @@ const Admins = () => {
     if (showTable) {
       setTitleText("Available Sucursal Admins");
       setButtonText("Add Admin");
+      setEditAdminInfo(false);
     } else {
       setTitleText("Create Sucursal Admin");
       setButtonText("Show All Admins");
@@ -92,12 +103,21 @@ const Admins = () => {
           </button>
         </div>
         {showTable ? (
-          <SucursalAdminsTable adminsList={admins} />
+          <SucursalAdminsTable
+            setShowTable={setShowTable}
+            adminsList={admins}
+            setEditAdminInfo={setEditAdminInfo}
+            setIdAdmin={setIdAdmin}
+          />
         ) : (
           <FormCreateAdmin
             adminsList={admins}
             setShowTable={setShowTable}
             setAdmins={setAdmins}
+            showTable={showTable}
+            editAdminInfo={editAdminInfo}
+            defaultIdAdmin={idAdmin}
+            submitInfoText={submitInfoText}
           />
         )}
       </div>
@@ -105,7 +125,8 @@ const Admins = () => {
   );
 };
 
-const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins }) => {
+const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, defaultIdAdmin, submitInfoText }) => {
+  
   const form = useRef(null);
 
   const submitCreateAdminForm = (e) => {
@@ -131,6 +152,8 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins }) => {
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
+            value={editAdminInfo ? defaultIdAdmin: ""}
+            disabled={editAdminInfo ? true: false}
           />
           <label
             for="id"
@@ -261,13 +284,14 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins }) => {
         type="submit"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
-        Create Suc Admin
+        {submitInfoText}
       </button>
     </form>
   );
 };
 
-const SucursalAdminsTable = ({ adminsList }) => {
+const SucursalAdminsTable = ({setShowTable, adminsList, setEditAdminInfo, setIdAdmin}) => {
+
   return (
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -300,27 +324,32 @@ const SucursalAdminsTable = ({ adminsList }) => {
           </tr>
         </thead>
         <tbody>
-          {adminsList.map((admin) => {
+          {adminsList.map((currentAdmin) => {
             return (
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
                   class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {admin.id}
+                  {currentAdmin.id}
                 </th>
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {admin.name}
+                  {currentAdmin.name}
                 </td>
-                <td class="px-6 py-4">{admin.lastName}</td>
-                <td class="px-6 py-4">{admin.gender}</td>
-                <td class="px-6 py-4">{admin.address}</td>
+                <td class="px-6 py-4">{currentAdmin.lastName}</td>
+                <td class="px-6 py-4">{currentAdmin.gender}</td>
+                <td class="px-6 py-4">{currentAdmin.address}</td>
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {admin.sucursal}
+                  {currentAdmin.sucursal}
                 </td>
-                <td class="px-6 py-4">{admin.email}</td>
+                <td class="px-6 py-4">{currentAdmin.email}</td>
                 <td class="px-6 py-4 text-right">
                   <a
+                    onClick={()=>{
+                      setEditAdminInfo(true);
+                      setShowTable(false);
+                      setIdAdmin(currentAdmin.id);
+                    }}
                     href="#"
                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
