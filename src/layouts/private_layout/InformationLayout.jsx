@@ -4,7 +4,7 @@ import SidebarOption from "components/SidebarOption";
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
-const InformationLayout = ({tableTitle, buttonTableText, formTitle, buttonFormText, showTable, setShowTable, table}) => {
+const InformationLayout = ({tableTitle, buttonTableText, formTitle, buttonFormText, showTable, setShowTable, table, form}) => {
   
   const [titleText, setTitleText] = useState(tableTitle);
   const [buttonText, setButtonText] = useState(buttonTableText);
@@ -54,7 +54,7 @@ const InformationLayout = ({tableTitle, buttonTableText, formTitle, buttonFormTe
       showTable ? (
         table
       ): (
-        <div>Hola </div>
+        form
       )
       
       }
