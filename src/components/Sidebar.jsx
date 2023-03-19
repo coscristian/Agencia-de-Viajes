@@ -5,7 +5,7 @@ const Sidebar = ({children}) => {
                 {children}
                 <hr></hr>
                 <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Docs</li>
-                <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Ayuda</li>
+                <li className='py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl'>Help</li>
             </ul>
         </div>
     );

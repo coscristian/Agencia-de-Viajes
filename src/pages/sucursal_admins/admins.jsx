@@ -52,6 +52,7 @@ const Admins = () => {
   const [buttonText, setButtonText] = useState("Add Admin");
   const [editAdminInfo, setEditAdminInfo] = useState(false);
   const [admins, setAdmins] = useState([]);
+  const [sucusarlAdminInfo, setSucursalAdminInfo] = useState({});
   const [idAdmin, setIdAdmin] = useState(0);
   const [submitInfoText, setSubmitInfoText] = useState("Create Suc Admin");
 
@@ -107,7 +108,7 @@ const Admins = () => {
             setShowTable={setShowTable}
             adminsList={admins}
             setEditAdminInfo={setEditAdminInfo}
-            setIdAdmin={setIdAdmin}
+            setSucursalAdminInfo={setSucursalAdminInfo}
           />
         ) : (
           <FormCreateAdmin
@@ -116,7 +117,8 @@ const Admins = () => {
             setAdmins={setAdmins}
             showTable={showTable}
             editAdminInfo={editAdminInfo}
-            defaultIdAdmin={idAdmin}
+            defaultSucAdminInfo={sucusarlAdminInfo}
+            
             submitInfoText={submitInfoText}
           />
         )}
@@ -125,7 +127,7 @@ const Admins = () => {
   );
 };
 
-const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, defaultIdAdmin, submitInfoText }) => {
+const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, defaultSucAdminInfo, submitInfoText }) => {
   
   const form = useRef(null);
 
@@ -152,7 +154,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
-            defaultValue={editAdminInfo ? defaultIdAdmin: ""}
+            defaultValue={editAdminInfo ? defaultSucAdminInfo.id: ""}
             disabled={editAdminInfo ? true: false}
           />
           <label
@@ -169,6 +171,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
+            defaultValue={editAdminInfo ? defaultSucAdminInfo.name: ""}
           />
           <label
             for="name"
@@ -184,6 +187,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
+            defaultValue={editAdminInfo ? defaultSucAdminInfo.lastName: ""}
           />
           <label
             for="lastName"
@@ -235,6 +239,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
+          defaultValue={editAdminInfo ? defaultSucAdminInfo.email: ""}
         />
         <label
           for="email"
@@ -250,6 +255,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
+          defaultValue={editAdminInfo ? defaultSucAdminInfo.address: ""}
         />
         <label
           for="address"
@@ -290,7 +296,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
   );
 };
 
-const SucursalAdminsTable = ({setShowTable, adminsList, setEditAdminInfo, setIdAdmin}) => {
+const SucursalAdminsTable = ({setShowTable, adminsList, setEditAdminInfo, setSucursalAdminInfo}) => {
 
   return (
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -348,7 +354,15 @@ const SucursalAdminsTable = ({setShowTable, adminsList, setEditAdminInfo, setIdA
                     onClick={()=>{
                       setEditAdminInfo(true);
                       setShowTable(false);
-                      setIdAdmin(currentAdmin.id);
+                      setSucursalAdminInfo({
+                        id: currentAdmin.id, 
+                        name: currentAdmin.name,
+                        lastName: currentAdmin.lastName,
+                        gender: currentAdmin.gender,
+                        address: currentAdmin.address,
+                        sucursal: currentAdmin.sucursal,
+                        email: currentAdmin.email
+                      });
                     }}
                     href="#"
                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
