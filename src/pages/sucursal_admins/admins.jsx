@@ -1,9 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import admin1 from "media/admin1.png";
-import admin2 from "media/admin2.jpg";
-import admin3 from "media/admin3.jpeg";
-import admin4 from "media/admin4.jpg";
-import SucursalCard from "components/SucursalCard";
 import Sidebar from "components/Sidebar";
 import { Link, Outlet } from "react-router-dom";
 
