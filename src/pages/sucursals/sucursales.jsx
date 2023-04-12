@@ -6,6 +6,11 @@ import EntityForm from "components/EntityForm";
 import FormGridHeader from "components/form/FormGridHeader";
 import FormInput from "components/form/FormInput";
 import FormInputSelect from "components/form/FormInputSelect";
+import Table from "components/table/Table";
+import TableBody from "components/table/TableBody";
+import TableHeader from "components/table/TableHeader";
+import TableRow from "components/table/TableRow";
+import TableHeaderColumn from "components/table/TableHeaderColumn";
 
 const sucursalsBackend = [
   {
@@ -50,8 +55,8 @@ function Sucursales() {
     <div className="flex flex-row bg-gray-100">
       <Sidebar>
         <SidebarOption optionText="Filter by" />
-        <SidebarOption optionText="Order by" />
-        <SidebarOption optionText="Hola Bro" />
+        <SidebarOption optionText="Order By" />
+        <SidebarOption optionText="Etc" />
       </Sidebar>
       <InformationLayout
         tableTitle="Available Sucursals"
@@ -60,9 +65,7 @@ function Sucursales() {
         buttonFormText="Show All Sucursals"
         showTable={showTable}
         setShowTable={setShowTable}
-        table={
-          <SucursalsTable sucursals={sucursals} setShowTable={setShowTable} />
-        }
+        table={<SucursalsTable sucursals={sucursals} setShowTable={setShowTable} />}
         form={
           <EntityForm
             entities={sucursals}
@@ -84,46 +87,51 @@ function Sucursales() {
                 placeholder=""
                 required={true}
                 editingInfo={false}
-                labelText="City"
+                labelText="Name"
               />
-              <FormInputSelect name="admin" labelText="Admin" required={false}>
-                <option>Cristian Quesada</option>
-                <option>Samir Nasri</option>
-                <option>Cal Newport</option>
-              </FormInputSelect>
-              <FormInput
-                type="tel"
-                name="phone"
-                placeholder=""
-                required={true}
-                editingInfo={false}
-                labelText="Phone"
-              />
-              <FormInput
-                type="number"
-                name="employees"
-                placeholder=""
-                required={true}
-                editingInfo={false}
-                labelText="# Employees"
-              />
-              <FormInput
-                type="number"
-                name="hotels"
-                placeholder=""
-                required={true}
-                editingInfo={false}
-                labelText="# Hotels"
-              />
-            </FormGridHeader>
 
             <FormInput
+              type="number"
+              name="employees"
+              placeholder=""
+              required={true}
+              editingInfo={false}
+              labelText="# Employees"
+            />
+            <FormInput
+              type="number"
+              name="hotels"
+              placeholder=""
+              required={true}
+              editingInfo={false}
+              labelText="# Hotels"
+            />
+            </FormGridHeader>
+            <FormInputSelect
+                name="admin"
+                labelText="Admin"
+                required={false}
+              >
+                <option>Cristian Quesada</option>
+                <option>Santiago Buitrago</option>
+                <option>Andres Felipe</option>
+                <option>None</option>
+              </FormInputSelect>
+              <FormInput
               type="text"
               name="address"
               placeholder=""
               required={true}
               editingInfo={false}
               labelText="Address"
+            />
+            <FormInput
+              type="tel"
+              name="phone"
+              placeholder=""
+              required={true}
+              editingInfo={false}
+              labelText="Phone"
             />
           </EntityForm>
         }
@@ -132,6 +140,31 @@ function Sucursales() {
   );
 }
 
+const SucursalsTable = ({sucursals, setShowTable}) => {
+  return (
+    <>
+    <Table>
+      <TableHeader>
+        <TableHeaderColumn text="ID" />
+        <TableHeaderColumn text="Name" />
+        <TableHeaderColumn text="Address" />
+        <TableHeaderColumn text="Phone" />
+        <TableHeaderColumn text="# Employees" />
+        <TableHeaderColumn text="# Hotels" />
+        <TableHeaderColumn text="Admin" />
+        <TableHeaderColumn text="Edit" />
+      </TableHeader>
+      <TableBody>
+        {sucursals.map((sucursal) => {
+          return <TableRow entity={sucursal} setShowTable={setShowTable} />;
+        })}
+      </TableBody>
+    </Table>
+  </>
+  );
+}
+
+/*
 const SucursalsTable = ({ sucursals, setShowTable }) => {
   return (
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -197,7 +230,7 @@ const SucursalsTable = ({ sucursals, setShowTable }) => {
                           address: currentAdmin.address,
                           sucursal: currentAdmin.sucursal,
                           email: currentAdmin.email
-                        });*/
+                        });
                     }}
                     href="#"
                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -213,5 +246,5 @@ const SucursalsTable = ({ sucursals, setShowTable }) => {
     </div>
   );
 };
-
+*/
 export default Sucursales;
