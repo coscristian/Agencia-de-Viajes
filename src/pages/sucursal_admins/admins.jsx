@@ -1,8 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "components/Sidebar";
-import { Link, Outlet } from "react-router-dom";
+import SidebarOption from "components/SidebarOption";
+import InformationLayout from "layouts/private_layout/InformationLayout";
+import { useEffect, useState } from "react";
+import EntityForm from "components/EntityForm";
+import FormGridHeader from "components/form/FormGridHeader";
+import FormInput from "components/form/FormInput";
+import Table from "components/table/Table";
+import TableBody from "components/table/TableBody";
+import TableHeader from "components/table/TableHeader";
+import TableRow from "components/table/TableRow";
+import TableHeaderColumn from "components/table/TableHeaderColumn";
+import FormInputSelect from "components/form/FormInputSelect";
 
-const backendData = [
+const sucursalAdminsBackend = [
   {
     id: "1297685647",
     name: "Juan Carlos",
@@ -42,6 +52,7 @@ const backendData = [
 ];
 
 const Admins = () => {
+  /*
   const [showTable, setShowTable] = useState(true);
   const [titleText, setTitleText] = useState("Available Sucursal Admins");
   const [buttonText, setButtonText] = useState("Add Admin");
@@ -50,7 +61,14 @@ const Admins = () => {
   const [sucusarlAdminInfo, setSucursalAdminInfo] = useState({});
   const [idAdmin, setIdAdmin] = useState(0);
   const [submitInfoText, setSubmitInfoText] = useState("Create Suc Admin");
+*/
+  const [showTable, setShowTable] = useState(true);
+  const [sucursalAdmins, setSucursalAdmins] = useState([]);
 
+  useEffect(() => {
+    setSucursalAdmins(sucursalAdminsBackend);
+  }, []);
+  /*
   useEffect(()=>{
     if(editAdminInfo){
       setSubmitInfoText("Update Suc Admin");
@@ -73,57 +91,128 @@ const Admins = () => {
       setButtonText("Show All Admins");
     }
   }, [showTable]);
-
+*/
   return (
-    <div className="flex flex-row bg-gray-100 h-screen">
+    <div className="flex flex-row bg-gray-100">
       <Sidebar>
-        <li className="py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl">
-          Filter by
-        </li>
-        <li className="py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl">
-          Order by
-        </li>
+        <SidebarOption optionText="Filter by" />
+        <SidebarOption optionText="Order By" />
+        <SidebarOption optionText="Etc" />
       </Sidebar>
-
-      <div className="flex flex-col my-5 w-full justify-center items-center mb-16">
-        <div className="flex w-full justify-evenly">
-          <h2 className="text-2xl my-5 font-sans font-bold">{titleText}</h2>
-          <button
-            type="button"
-            class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            onClick={() => {
-              setShowTable(!showTable);
-            }}
-          >
-            {buttonText}
-          </button>
-        </div>
-        {showTable ? (
+      <InformationLayout
+        tableTitle="Available Sucursal Admins"
+        buttonTableText="Create Sucursal Admin"
+        formTitle="Creating Sucursal Admin"
+        buttonFormText="Show All Sucursal Admins"
+        showTable={showTable}
+        setShowTable={setShowTable}
+        table={
           <SucursalAdminsTable
+            sucursalAdmins={sucursalAdmins}
             setShowTable={setShowTable}
-            adminsList={admins}
-            setEditAdminInfo={setEditAdminInfo}
-            setSucursalAdminInfo={setSucursalAdminInfo}
           />
-        ) : (
-          <FormCreateAdmin
-            adminsList={admins}
+        }
+        form={
+          <EntityForm
+            entities={sucursalAdmins}
+            setEntities={setSucursalAdmins}
             setShowTable={setShowTable}
-            setAdmins={setAdmins}
-            showTable={showTable}
-            editAdminInfo={editAdminInfo}
-            defaultSucAdminInfo={sucusarlAdminInfo}
-            
-            submitInfoText={submitInfoText}
-          />
-        )}
-      </div>
+          >
+            <FormGridHeader>
+              <FormInput
+                type="text"
+                name="dni"
+                placeholder=""
+                required={true}
+                editingInfo={false}
+                labelText="DNI"
+              />
+              <FormInput
+                type="text"
+                name="name"
+                placeholder=""
+                required={true}
+                editingInfo={false}
+                labelText="Name"
+              />
+              <FormInput
+                type="text"
+                name="lastname"
+                placeholder=""
+                required={true}
+                editingInfo={false}
+                labelText="Last Name"
+              />
+              <FormInputSelect name="gender" labelText="Gender" required={true}>
+                <option>Male</option>
+                <option>Female</option>
+              </FormInputSelect>
+            </FormGridHeader>
+            <FormInputSelect
+              name="sucursal"
+              labelText="Sucursal"
+              required={true}
+            >
+              <option>Pereira</option>
+              <option>Cali</option>
+              <option>Medellín</option>
+              <option>Bogotá</option>
+            </FormInputSelect>
+            <FormInput
+              type="text"
+              name="address"
+              placeholder=""
+              required={true}
+              editingInfo={false}
+              labelText="Address"
+            />
+            <FormInput
+              type="email"
+              name="email"
+              placeholder=""
+              required={true}
+              editingInfo={false}
+              labelText="Email"
+            />
+          </EntityForm>
+        }
+      />
     </div>
   );
 };
 
-const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, defaultSucAdminInfo, submitInfoText }) => {
-  
+const SucursalAdminsTable = ({ sucursalAdmins, setShowTable }) => {
+  return (
+    <Table>
+      <TableHeader>
+        <TableHeaderColumn text="DNI" />
+        <TableHeaderColumn text="Name" />
+        <TableHeaderColumn text="Last Name" />
+        <TableHeaderColumn text="Gender" />
+        <TableHeaderColumn text="Address" />
+        <TableHeaderColumn text="Email" />
+        <TableHeaderColumn text="Sucursal" />
+        <TableHeaderColumn text="Edit" />
+      </TableHeader>
+      <TableBody>
+        {sucursalAdmins.map((sucursalAdmin) => {
+          return (
+            <TableRow entity={sucursalAdmin} setShowTable={setShowTable} />
+          );
+        })}
+      </TableBody>
+    </Table>
+  );
+};
+/*
+const FormCreateAdmin = ({
+  adminsList,
+  setShowTable,
+  setAdmins,
+  editAdminInfo,
+  defaultSucAdminInfo,
+  submitInfoText,
+}) => {
   const form = useRef(null);
 
   const submitCreateAdminForm = (e) => {
@@ -149,8 +238,8 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
-            defaultValue={editAdminInfo ? defaultSucAdminInfo.id: ""}
-            disabled={editAdminInfo ? true: false}
+            defaultValue={editAdminInfo ? defaultSucAdminInfo.id : ""}
+            disabled={editAdminInfo ? true : false}
           />
           <label
             for="id"
@@ -166,7 +255,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
-            defaultValue={editAdminInfo ? defaultSucAdminInfo.name: ""}
+            defaultValue={editAdminInfo ? defaultSucAdminInfo.name : ""}
           />
           <label
             for="name"
@@ -182,7 +271,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
-            defaultValue={editAdminInfo ? defaultSucAdminInfo.lastName: ""}
+            defaultValue={editAdminInfo ? defaultSucAdminInfo.lastName : ""}
           />
           <label
             for="lastName"
@@ -213,20 +302,20 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
         </div>
       </div>
       <div class="relative z-0 w-full mb-6 group">
-          <input
-            type="tel"
-            name="phoneNumber"
-            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            required
-          />
-          <label
-            for="phoneNumber"
-            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Phone number (3207101556)
-          </label>
-        </div>
+        <input
+          type="tel"
+          name="phoneNumber"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+          required
+        />
+        <label
+          for="phoneNumber"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >
+          Phone number (3207101556)
+        </label>
+      </div>
       <div class="relative z-0 w-full mb-6 group">
         <input
           type="email"
@@ -234,7 +323,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
-          defaultValue={editAdminInfo ? defaultSucAdminInfo.email: ""}
+          defaultValue={editAdminInfo ? defaultSucAdminInfo.email : ""}
         />
         <label
           for="email"
@@ -250,7 +339,7 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
-          defaultValue={editAdminInfo ? defaultSucAdminInfo.address: ""}
+          defaultValue={editAdminInfo ? defaultSucAdminInfo.address : ""}
         />
         <label
           for="address"
@@ -291,8 +380,13 @@ const FormCreateAdmin = ({ adminsList, setShowTable, setAdmins, editAdminInfo, d
   );
 };
 
-const SucursalAdminsTable = ({setShowTable, adminsList, setEditAdminInfo, setSucursalAdminInfo}) => {
 
+const SucursalAdminsTable = ({
+  setShowTable,
+  adminsList,
+  setEditAdminInfo,
+  setSucursalAdminInfo,
+}) => {
   return (
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -346,17 +440,17 @@ const SucursalAdminsTable = ({setShowTable, adminsList, setEditAdminInfo, setSuc
                 <td class="px-6 py-4">{currentAdmin.email}</td>
                 <td class="px-6 py-4 text-right">
                   <a
-                    onClick={()=>{
+                    onClick={() => {
                       setEditAdminInfo(true);
                       setShowTable(false);
                       setSucursalAdminInfo({
-                        id: currentAdmin.id, 
+                        id: currentAdmin.id,
                         name: currentAdmin.name,
                         lastName: currentAdmin.lastName,
                         gender: currentAdmin.gender,
                         address: currentAdmin.address,
                         sucursal: currentAdmin.sucursal,
-                        email: currentAdmin.email
+                        email: currentAdmin.email,
                       });
                     }}
                     href="#"
@@ -373,5 +467,5 @@ const SucursalAdminsTable = ({setShowTable, adminsList, setEditAdminInfo, setSuc
     </div>
   );
 };
-
+*/
 export default Admins;
