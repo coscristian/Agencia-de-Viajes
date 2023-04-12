@@ -116,7 +116,7 @@ const Hotels = () => {
 };
 
 const HotelTable = ({hotels, setShowTable}) => {
-  console.log(hotels)
+  
   return (
     <>
       <Table>
