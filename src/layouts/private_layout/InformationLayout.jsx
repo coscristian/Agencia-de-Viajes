@@ -1,8 +1,4 @@
-import NavBar from "components/NavBar";
-import Sidebar from "components/Sidebar";
-import SidebarOption from "components/SidebarOption";
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
 
 const InformationLayout = ({tableTitle, buttonTableText, formTitle, buttonFormText, showTable, setShowTable, table, form}) => {
   

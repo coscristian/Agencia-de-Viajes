@@ -1,33 +1,16 @@
-const TableRow = (props) => {
-    
+const TableRow = ({ entity, setShowTable }) => {
+  const data = Object.values(entity);
+
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-      <th
-        scope="row"
-        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-      >
-        {sucursal.id}
-      </th>
-        {
-            /*
-        for(const property in props.rowData){
-            <td class="px-6 py-4">{props.rowData[property]}</td>
-        }*/
-        }
-      <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        {sucursal.name}
-      </td>
-      <td class="px-6 py-4">{sucursal.address}</td>
-      <td class="px-6 py-4">{sucursal.phone}</td>
-      <td class="px-6 py-4">{sucursal.employees}</td>
-      <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        {sucursal.hotels}
-      </td>
-      <td class="px-6 py-4">{sucursal.admin}</td>
+      {data.map((value) => {
+        return <td class="px-6 py-4">{value}</td>;
+      })}
+
       <td class="px-6 py-4 text-right">
         <a
           onClick={() => {
-            //setEditAdminInfo(true);
+            
             setShowTable(false);
             /*setSucursalAdminInfo({
                             id: currentAdmin.id, 
