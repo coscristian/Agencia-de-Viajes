@@ -46,7 +46,7 @@ const sucursalAdminsBackend = [
     lastName: "Quesada Cossio",
     gender: "Masculino",
     address: "Tinajas",
-    email: "juan_gg@gmail.com",
+    email: "juanjosequesadacossio@gmail.com",
     sucursal: "Pereira",
   },
 ];
