@@ -1,7 +1,7 @@
 import Sidebar from "components/Sidebar";
 import SidebarOption from "components/SidebarOption";
 import InformationLayout from "layouts/private_layout/InformationLayout";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import EntityForm from "components/EntityForm";
 import FormGridHeader from "components/form/FormGridHeader";
 import FormInput from "components/form/FormInput";
@@ -10,44 +10,32 @@ import TableBody from "components/table/TableBody";
 import TableHeader from "components/table/TableHeader";
 import TableRow from "components/table/TableRow";
 import TableHeaderColumn from "components/table/TableHeaderColumn";
-
-const customersBackend = [
-  {
-    dni: "1087489",
-    name: "Camila",
-    lastName: "Montoya",
-    sucursal: "Medellín",
-    address: "Pinares",
-    phone: "320456987",
-    email: "camila_montoya@gmail.com",
-  },
-  {
-    dni: "1189635",
-    name: "Andrea",
-    lastName: "Gallardo",
-    sucursal: "Pereira",
-    address: "Pinares",
-    phone: "320456987",
-    email: "andrea_gallardo@gmail.com",
-  },
-  {
-    dni: "4785212",
-    name: "Camilo",
-    lastName: "Perez",
-    sucursal: "Bogotá",
-    address: "Pinares",
-    phone: "320456987",
-    email: "camilo_perez@gmail.com",
-  },
-];
+import CustomerForm from "components/form/customers/CustomerForm";
+import axios from "axios";
 
 const Customers = () => {
   const [showTable, setShowTable] = useState(true);
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    setCustomers(customersBackend);
-  }, []);
+    if (showTable) {
+      var options = {
+        method: "GET",
+        url: "http://localhost:8080/admin/turistas",
+        headers: { "Content-Type": "application/json" },
+      };
+
+      axios
+        .request(options)
+        .then(function (response) {
+          setCustomers(response.data);
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    }
+  }, [showTable]);
 
   return (
     <div className="flex flex-row bg-gray-100">
@@ -63,9 +51,11 @@ const Customers = () => {
         buttonFormText="Show All Customers"
         showTable={showTable}
         setShowTable={setShowTable}
-        table={<CustomersTable customers={customers} setShowTable={setShowTable} />}
+        table={
+          <CustomersTable customers={customers} setShowTable={setShowTable} />
+        }
         form={
-          <EntityForm
+          <CustomerForm
             entities={customers}
             setEntities={setCustomers}
             setShowTable={setShowTable}
@@ -73,83 +63,91 @@ const Customers = () => {
             <FormGridHeader>
               <FormInput
                 type="text"
-                name="dni"
+                name="codigo"
                 placeholder=""
                 required={true}
                 editingInfo={false}
-                labelText="DNI"
+                labelText="Código"
               />
               <FormInput
                 type="text"
-                name="name"
+                name="nombre"
                 placeholder=""
                 required={true}
                 editingInfo={false}
-                labelText="Name"
-              />
-              <FormInput
-                type="text"
-                name="lastname"
-                placeholder=""
-                required={true}
-                editingInfo={false}
-                labelText="Last Name"
+                labelText="Nombre"
               />
             </FormGridHeader>
-
             <FormInput
               type="text"
-              name="address"
+              name="apellidos"
               placeholder=""
               required={true}
               editingInfo={false}
-              labelText="Address"
-            />
-            <FormInput
-              type="email"
-              name="email"
-              placeholder=""
-              required={true}
-              editingInfo={false}
-              labelText="Email"
+              labelText="Apellidos"
             />
             <FormInput
               type="tel"
-              name="phone"
+              name="telefono"
               placeholder=""
               required={true}
               editingInfo={false}
-              labelText="Phone"
+              labelText="Telefono"
             />
-          </EntityForm>
+            <FormInput
+              type="text"
+              name="direccion"
+              placeholder=""
+              required={true}
+              editingInfo={false}
+              labelText="Calle"
+            />
+            <FormInput
+              type="text"
+              name="ciudad"
+              placeholder=""
+              required={true}
+              editingInfo={false}
+              labelText="Ciudad"
+            />
+          </CustomerForm>
         }
       />
     </div>
   );
-}
+};
 
-const CustomersTable = ({customers, setShowTable}) => {
+const CustomersTable = ({ customers, setShowTable }) => {
   return (
     <>
       <Table>
         <TableHeader>
-          <TableHeaderColumn text="DNI" />
-          <TableHeaderColumn text="Name" />
-          <TableHeaderColumn text="Last Name" />
-          <TableHeaderColumn text="Address" />
-          <TableHeaderColumn text="Sucursal" />
-          <TableHeaderColumn text="Phone" />
-          <TableHeaderColumn text="Email" />
+          <TableHeaderColumn text="Código" />
+          <TableHeaderColumn text="Nombre" />
+          <TableHeaderColumn text="Apellidos" />
+          <TableHeaderColumn text="Dirección" />
+          <TableHeaderColumn text="Ciudad" />
+          <TableHeaderColumn text="Telefono" />
+          <TableHeaderColumn text="Activo" />
           <TableHeaderColumn text="Edit" />
         </TableHeader>
         <TableBody>
           {customers.map((customer) => {
-            return <TableRow entity={customer} setShowTable={setShowTable} />;
+            const c = {
+              codigo: customer["codigo"],
+              nombre: customer["nombre"],
+              apellidos: customer["apellidos"],
+              direccion: customer["direccion"],
+              ciudad: customer["ciudad"],
+              telefono: customer["telefono"],
+              activo: customer["activo"],
+            };
+            return <TableRow entity={c} setShowTable={setShowTable} />;
           })}
         </TableBody>
       </Table>
     </>
   );
-}
+};
 
 export default Customers;

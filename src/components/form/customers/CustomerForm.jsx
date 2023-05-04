@@ -2,7 +2,7 @@ import React from "react";
 import { useRef } from "react";
 import axios from "axios";
 
-const EntityForm = (props) =>
+const CustomerForm = (props) =>
   {
     const form = useRef(null);
 
@@ -61,4 +61,4 @@ const Form = (props) => {
   );
 };
 
-export default EntityForm;
+export default CustomerForm;

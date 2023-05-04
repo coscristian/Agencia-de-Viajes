@@ -1,4 +1,4 @@
-const TableRow = ({ entity, setShowTable }) => {
+const SellerRow = ({ entity, setShowTable }) => {
   const data = Object.values(entity);
 
   return (
@@ -21,6 +21,19 @@ const TableRow = ({ entity, setShowTable }) => {
       })}
 
       <td class="px-6 py-4 text-right">
+        <a        
+          onClick={() => {
+            // Aquí mostrar modal con informacion de la asignacion del trabajo
+            setShowTable(false);
+          }}
+          href="#"
+          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+        >
+          Ver
+        </a>
+      </td>
+
+      <td class="px-6 py-4 text-right">
         <a
           onClick={() => {
             setShowTable(false);
@@ -35,4 +48,4 @@ const TableRow = ({ entity, setShowTable }) => {
   );
 };
 
-export default TableRow;
+export default SellerRow;
