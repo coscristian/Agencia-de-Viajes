@@ -9,45 +9,72 @@ import FormInputSelect from "components/form/FormInputSelect";
 import Table from "components/table/Table";
 import TableBody from "components/table/TableBody";
 import TableHeader from "components/table/TableHeader";
-import TableRow from "components/table/TableRow";
+import SellerRow from "components/form/sellers/SellerRow";
 import TableHeaderColumn from "components/table/TableHeaderColumn";
+import SucursalesService from "services/SucursalesService";
+import axios from "axios";
+
 
 const sellersBackend = [
   {
     dni: "1087489",
     name: "Camila",
     lastName: "Montoya",
-    sucursal: "Medellín",
-    address: "Pinares",
     phone: "320456987",
-    email: "camila_montoya@gmail.com",
+    sucursal: "Medellín",
+    address: "Pinares"
+    
   },
   {
     dni: "1189635",
     name: "Andrea",
     lastName: "Gallardo",
-    sucursal: "Pereira",
-    address: "Pinares",
     phone: "320456987",
-    email: "andrea_gallardo@gmail.com",
+    sucursal: "Pereira",
+    address: "Pinares"
+    
   },
   {
     dni: "4785212",
     name: "Camilo",
     lastName: "Perez",
-    sucursal: "Bogotá",
-    address: "Pinares",
     phone: "320456987",
-    email: "camilo_perez@gmail.com",
+    sucursal: "Bogotá",
+    address: "Pinares"
   },
 ];
 
 const Sellers = () => {
   const [showTable, setShowTable] = useState(true);
   const [sellers, setSellers] = useState([]);
+  const [sucursales, setSucursales] = useState([]);
 
   useEffect(() => {
     setSellers(sellersBackend);
+    SucursalesService.getSucursales().then(AsyncSucursales =>{
+      setSucursales(AsyncSucursales);
+    });
+    //setSucursales(SucursalesService.getSucursales());
+    console.log(sucursales);
+    console.log("Hola")
+    //console.log(SucursalesService.getSucursales())
+    /*
+    var options = {
+      method: "GET",
+      url: "http://localhost:8080/admin/sucursales",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        setSucursales(response.data);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+      */
   }, []);
 
   return (
@@ -74,37 +101,38 @@ const Sellers = () => {
             <FormGridHeader>
               <FormInput
                 type="text"
-                name="dni"
+                name="codigo"
                 placeholder=""
                 required={true}
                 editingInfo={false}
-                labelText="DNI"
+                labelText="Código"
               />
               <FormInput
                 type="text"
-                name="name"
+                name="nombre"
                 placeholder=""
                 required={true}
                 editingInfo={false}
-                labelText="Name"
+                labelText="Nombre"
               />
               <FormInput
                 type="text"
-                name="lastname"
+                name="apellidos"
                 placeholder=""
                 required={true}
                 editingInfo={false}
-                labelText="Last Name"
+                labelText="Apellidos"
               />
               <FormInputSelect
-                name="sucursal"
+                name="cod_sucursal"
                 labelText="Sucursal"
                 required={true}
-              >
-                <option>Pereira</option>
-                <option>Cali</option>
-                <option>Medellín</option>
-                <option>Bogotá</option>
+              >{
+                sucursales.map((sucursal) => {
+                  return <option>{sucursal["ciudad"]}</option>
+                })
+              }
+
               </FormInputSelect>
             </FormGridHeader>
 
@@ -144,18 +172,26 @@ const SellersTable = ({ sellers, setShowTable }) => {
     <>
       <Table>
         <TableHeader>
-          <TableHeaderColumn text="DNI" />
-          <TableHeaderColumn text="Name" />
-          <TableHeaderColumn text="Last Name" />
-          <TableHeaderColumn text="Address" />
+          <TableHeaderColumn text="Código" />
+          <TableHeaderColumn text="Nombre" />
+          <TableHeaderColumn text="Apellido" />
+          <TableHeaderColumn text="Telefono" />
           <TableHeaderColumn text="Sucursal" />
-          <TableHeaderColumn text="Phone" />
-          <TableHeaderColumn text="Email" />
+          <TableHeaderColumn text="Dirección" />
+          <TableHeaderColumn text="Info Trabajo" />
+          {/*
+          <TableHeaderColumn text="correo" />
+          <TableHeaderColumn text="Asignado por" />
+          <TableHeaderColumn text="Fecha Asignación" />
+          <TableHeaderColumn text="Fecha Inicio" />
+          <TableHeaderColumn text="Fecha Fin" />
+          */
+        }
           <TableHeaderColumn text="Edit" />
         </TableHeader>
         <TableBody>
           {sellers.map((seller) => {
-            return <TableRow entity={seller} setShowTable={setShowTable} />;
+            return <SellerRow entity={seller} setShowTable={setShowTable} />;
           })}
         </TableBody>
       </Table>
