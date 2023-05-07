@@ -2,11 +2,11 @@ import axios from "axios";
 
 const PORT = "8080";
 
-class VendedorService {
-  async getVendedores() {
+class TrabajoVendedorService {
+  async getTrabajoVendedor() {
     var options = {
       method: "GET",
-      url: "http://localhost:" + PORT + "/admin/vendedores",
+      url: "http://localhost:" + PORT + "/admin/trabajo_vendedor",
       headers: { "Content-Type": "application/json" },
     };
     return await axios
@@ -20,12 +20,12 @@ class VendedorService {
       });
   }
 
-  async postVendedor(vendedorDataToSend) {
+  async postTrabajoVendedor(trabajoVendedorDataToSend) {
     var options = {
       method: "POST",
-      url: "http://localhost:" + PORT + "/admin/vendedor/crear",
+      url: "http://localhost:" + PORT + "/admin/trabajoVendedor/crear",
       headers: { "Content-Type": "application/json" },
-      data: vendedorDataToSend,
+      data: trabajoVendedorDataToSend,
     };
     return await axios
       .request(options)
@@ -38,4 +38,4 @@ class VendedorService {
   }
 }
 
-export default new VendedorService();
+export default new TrabajoVendedorService();

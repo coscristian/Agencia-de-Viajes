@@ -1,6 +1,7 @@
 import React from "react";
 import { useRef } from "react";
-import axios from "axios";
+import TrabajoVendedorService from "services/TrabajoVendedorService";
+import VendedorService from "services/VendedorService";
 
 const SellerForm = (props) => {
   const form = useRef(null);
@@ -13,35 +14,27 @@ const SellerForm = (props) => {
     fd.forEach((value, key) => {
       newEntity[key] = value;
     });
-
     props.setShowTable(true);
-    console.log(newEntity["codigo"]);
-    var options = {
-      method: "POST",
-      url: "http://localhost:8080/admin/vendedor/crear",
-      headers: { "Content-Type": "application/json" },
 
-      data: {
-        codigo: newEntity["codigo"],
-        nombre: newEntity["nombre"],
-        apellidos: newEntity["apellidos"],
-        telefono: newEntity["telefono"],
-        codigoSucursal: parseInt(newEntity["cod_sucursal"]),
-        codigoAdminGeneral: newEntity["cod_admin_general"],
-        fechaInicio: newEntity["fecha_inicio"],
-        fechaFin: newEntity["fecha_fin"],
-        activo: true,
-      },
+    const vendedorDataToSend = {
+      codigo: newEntity["codigo"],
+      nombre: newEntity["nombre"],
+      apellidos: newEntity["apellidos"],
+      telefono: newEntity["telefono"],
+      codigoSucursal: parseInt(newEntity["cod_sucursal"]),
+      codigoAdminGeneral: newEntity["cod_admin_general"],
+      activo: true,
     };
 
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    const trabajoVendedorDataToSend = {
+      fechaInicio: newEntity["fecha_inicio"],
+      fechaFin: newEntity["fecha_fin"],
+      codigoVendedor: newEntity["codigo"],
+      codigoAdminGeneral: newEntity["cod_admin_general"],
+      codigoSucursal: parseInt(newEntity["cod_sucursal"]),
+    };
+    VendedorService.postVendedor(vendedorDataToSend);
+    TrabajoVendedorService.postTrabajoVendedor(trabajoVendedorDataToSend);
   };
 
   return (

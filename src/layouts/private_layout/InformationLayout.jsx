@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
 
-const InformationLayout = ({tableTitle, buttonTableText, formTitle, buttonFormText, showTable, setShowTable, table, form}) => {
-  
+const InformationLayout = ({
+  tableTitle,
+  buttonTableText,
+  formTitle,
+  buttonFormText,
+  showTable,
+  setShowTable,
+  table,
+  form,
+}) => {
   const [titleText, setTitleText] = useState(tableTitle);
   const [buttonText, setButtonText] = useState(buttonTableText);
-  
-  useEffect(()=> {
-    if(showTable) {
+
+  useEffect(() => {
+    if (showTable) {
       setButtonText(buttonTableText);
       setTitleText(tableTitle);
-    }else{
+    } else {
       setButtonText(buttonFormText);
       setTitleText(formTitle);
     }
   }, [showTable]);
-  
+
   return (
     <div className="flex flex-col my-5 w-full justify-center items-center mb-16 bg-gray-100 h-screen">
       <div className="flex w-full justify-evenly">
@@ -29,31 +37,7 @@ const InformationLayout = ({tableTitle, buttonTableText, formTitle, buttonFormTe
           {buttonText}
         </button>
       </div>
-      {/*showTable ? (
-        <SucursalAdminsTable
-          setShowTable={setShowTable}
-          adminsList={admins}
-          setEditAdminInfo={setEditAdminInfo}
-          setSucursalAdminInfo={setSucursalAdminInfo}
-        />
-      ) : (
-        <FormCreateAdmin
-          adminsList={admins}
-          setShowTable={setShowTable}
-          setAdmins={setAdmins}
-          showTable={showTable}
-          editAdminInfo={editAdminInfo}
-          defaultSucAdminInfo={sucusarlAdminInfo}
-          submitInfoText={submitInfoText}
-        />
-      )*/
-      showTable ? (
-        table
-      ): (
-        form
-      )
-      
-      }
+      {showTable ? table : form}
     </div>
   );
 };
