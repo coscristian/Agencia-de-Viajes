@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const PORT = "8080";
-const ROUTE = "/admin/sucursales";
+const ROUTE = "/admin/vendedores";
 const SUCURSAL_API_BASE_URL = "http://localhost:" + PORT + ROUTE;
 
 var options = {
@@ -10,8 +10,8 @@ var options = {
   headers: { "Content-Type": "application/json" },
 };
 
-class SucursalesService {
-    async getSucursales() {
+class VendedorService {
+    async getVendedores() {
     return await axios
       .request(options)
       .then(function (response) {
@@ -24,4 +24,4 @@ class SucursalesService {
   }
 }
 
-export default new SucursalesService();
+export default new VendedorService();

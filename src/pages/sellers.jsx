@@ -12,51 +12,32 @@ import TableHeader from "components/table/TableHeader";
 import SellerRow from "components/form/sellers/SellerRow";
 import TableHeaderColumn from "components/table/TableHeaderColumn";
 import SucursalesService from "services/SucursalesService";
-import axios from "axios";
-
-
-const sellersBackend = [
-  {
-    dni: "1087489",
-    name: "Camila",
-    lastName: "Montoya",
-    phone: "320456987",
-    sucursal: "Medellín",
-    address: "Pinares"
-    
-  },
-  {
-    dni: "1189635",
-    name: "Andrea",
-    lastName: "Gallardo",
-    phone: "320456987",
-    sucursal: "Pereira",
-    address: "Pinares"
-    
-  },
-  {
-    dni: "4785212",
-    name: "Camilo",
-    lastName: "Perez",
-    phone: "320456987",
-    sucursal: "Bogotá",
-    address: "Pinares"
-  },
-];
+import VendedorService from "services/VendedorService";
+import AdminGeneralService from "services/AdminGeneralService";
+import SellerForm from "components/form/sellers/SellerForm";
 
 const Sellers = () => {
   const [showTable, setShowTable] = useState(true);
-  const [sellers, setSellers] = useState([]);
   const [sucursales, setSucursales] = useState([]);
+  const [vendedores, setVendedores] = useState([]);
+  const [adminsGeneral, setAdminsGeneral] = useState([]);
 
   useEffect(() => {
-    setSellers(sellersBackend);
-    SucursalesService.getSucursales().then(AsyncSucursales =>{
+    SucursalesService.getSucursales().then((AsyncSucursales) => {
       setSucursales(AsyncSucursales);
     });
+    VendedorService.getVendedores().then((AsyncVendedores) => {
+      setVendedores(AsyncVendedores);
+    });
+    AdminGeneralService.getAdminsGeneral().then(AsyncAdminsGeneral => {
+      setAdminsGeneral(AsyncAdminsGeneral);
+    })
+
     //setSucursales(SucursalesService.getSucursales());
     console.log(sucursales);
-    console.log("Hola")
+    console.log("Hola");
+    console.log(vendedores);
+
     //console.log(SucursalesService.getSucursales())
     /*
     var options = {
@@ -91,11 +72,13 @@ const Sellers = () => {
         buttonFormText="Show All Sellers"
         showTable={showTable}
         setShowTable={setShowTable}
-        table={<SellersTable sellers={sellers} setShowTable={setShowTable} />}
+        table={
+          <SellersTable sellers={vendedores} setShowTable={setShowTable} />
+        }
         form={
-          <EntityForm
-            entities={sellers}
-            setEntities={setSellers}
+          <SellerForm
+            entities={vendedores}
+            setEntities={vendedores}
             setShowTable={setShowTable}
           >
             <FormGridHeader>
@@ -123,44 +106,52 @@ const Sellers = () => {
                 editingInfo={false}
                 labelText="Apellidos"
               />
+              <FormInput
+                type="tel"
+                name="telefono"
+                placeholder=""
+                required={true}
+                editingInfo={false}
+                labelText="Telefono"
+              />
               <FormInputSelect
                 name="cod_sucursal"
                 labelText="Sucursal"
                 required={true}
-              >{
-                sucursales.map((sucursal) => {
-                  return <option>{sucursal["ciudad"]}</option>
-                })
-              }
-
+              >
+                {sucursales.map((sucursal) => {
+                  return <option value={sucursal["codigo"]}>{sucursal["ciudad"]}</option>;
+                })}
+              </FormInputSelect>
+              <FormInputSelect
+                name="cod_admin_general"
+                labelText="Admin General"
+                required={true}
+              >
+                {adminsGeneral.map((admin) => {
+                  return <option value={admin["codigo"]}>{admin["nombre"]}</option>;
+                })}
               </FormInputSelect>
             </FormGridHeader>
 
             <FormInput
-              type="text"
-              name="address"
+              type="date"
+              name="fecha_inicio"
               placeholder=""
               required={true}
               editingInfo={false}
-              labelText="Address"
+              labelText="Fecha Inicio Contrato"
             />
+
             <FormInput
-              type="email"
-              name="email"
+              type="date"
+              name="fecha_fin"
               placeholder=""
               required={true}
               editingInfo={false}
-              labelText="Email"
+              labelText="Fecha Fin Contrato"
             />
-            <FormInput
-              type="tel"
-              name="phone"
-              placeholder=""
-              required={true}
-              editingInfo={false}
-              labelText="Phone"
-            />
-          </EntityForm>
+          </SellerForm>
         }
       />
     </div>
@@ -185,8 +176,7 @@ const SellersTable = ({ sellers, setShowTable }) => {
           <TableHeaderColumn text="Fecha Asignación" />
           <TableHeaderColumn text="Fecha Inicio" />
           <TableHeaderColumn text="Fecha Fin" />
-          */
-        }
+          */}
           <TableHeaderColumn text="Edit" />
         </TableHeader>
         <TableBody>
