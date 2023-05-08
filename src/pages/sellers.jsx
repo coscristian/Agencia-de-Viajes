@@ -33,8 +33,6 @@ const Sellers = () => {
       setAdminsGeneral(AsyncAdminsGeneral);
     });
 
-    
-
     //setSucursales(SucursalesService.getSucursales());
     console.log(sucursales);
     console.log("Hola");
@@ -167,8 +165,13 @@ const Sellers = () => {
 };
 
 const SellersTable = ({ sellers, setShowTable }) => {
+  const submitEdit = (e) => {
+    e.preventDefault();
+    console.log(e);
+  }
+
   return (
-    <>
+    <form onSubmit={submitEdit}>
       <Table>
         <TableHeader>
           <TableHeaderColumn text="Código" />
@@ -193,14 +196,14 @@ const SellersTable = ({ sellers, setShowTable }) => {
               nombre: seller["nombre"],
               apellidos: seller["apellidos"],
               telefono: seller["telefono"],
-              activo: seller["activo"]
+              activo: seller["activo"],
             };
 
             return <SellerRow entity={s} setShowTable={setShowTable} />;
           })}
         </TableBody>
       </Table>
-    </>
+    </form>
   );
 };
 
