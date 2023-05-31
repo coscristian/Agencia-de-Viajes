@@ -15,13 +15,11 @@ const CustomerForm = (props) =>
         newEntity[key] = value;
       });
 
-      props.setShowTable(true);
       console.log(newEntity["codigo"])
       var options = {
         method: 'POST',
         url: 'http://localhost:8080/admin/turista/crear',
         headers: {'Content-Type': 'application/json'},
-
         data: {
           codigo: newEntity["codigo"],
           nombre: newEntity["nombre"],
@@ -35,6 +33,7 @@ const CustomerForm = (props) =>
       
       axios.request(options).then(function (response) {
         console.log(response.data);
+        props.setShowTable(true);
       }).catch(function (error) {
         console.error(error);
       });

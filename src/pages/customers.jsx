@@ -1,7 +1,7 @@
 import Sidebar from "components/Sidebar";
 import SidebarOption from "components/SidebarOption";
 import InformationLayout from "layouts/private_layout/InformationLayout";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import FormGridHeader from "components/form/FormGridHeader";
 import FormInput from "components/form/FormInput";
 import Table from "components/table/Table";

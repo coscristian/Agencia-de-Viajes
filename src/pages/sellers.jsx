@@ -37,25 +37,6 @@ const Sellers = () => {
     console.log(sucursales);
     console.log("Hola");
     console.log(vendedores);
-
-    //console.log(SucursalesService.getSucursales())
-    /*
-    var options = {
-      method: "GET",
-      url: "http://localhost:8080/admin/sucursales",
-      headers: { "Content-Type": "application/json" },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        setSucursales(response.data);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-      */
   }, []);
 
   return (
