@@ -11,10 +11,13 @@ import TableRow from "components/table/TableRow";
 import TableHeaderColumn from "components/table/TableHeaderColumn";
 import CustomerForm from "components/form/customers/CustomerForm";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Customers = () => {
   const [showTable, setShowTable] = useState(true);
   const [customers, setCustomers] = useState([]);
+  const [addedCustomer, setAddedCustomer] = useState(false);
 
   useEffect(() => {
     if (showTable) {
@@ -27,6 +30,10 @@ const Customers = () => {
       axios
         .request(options)
         .then(function (response) {
+          if(addedCustomer) {
+            toast.success("Agregado correctamente");
+            setAddedCustomer(false);
+          }
           setCustomers(response.data);
           console.log(response.data);
         })
@@ -34,7 +41,7 @@ const Customers = () => {
           console.error(error);
         });
     }
-  }, [showTable]);
+  }, [showTable, addedCustomer]);
 
   return (
     <div className="flex flex-row bg-gray-100">
@@ -48,8 +55,8 @@ const Customers = () => {
         buttonTableText="Create Customer"
         formTitle="Creating Customer"
         buttonFormText="Show All Customers"
-        showTable={showTable}
-        setShowTable={setShowTable}
+        showTable = {showTable}
+        setShowTable = {setShowTable}
         table={
           <CustomersTable customers={customers} setShowTable={setShowTable} />
         }
@@ -58,6 +65,7 @@ const Customers = () => {
             entities={customers}
             setEntities={setCustomers}
             setShowTable={setShowTable}
+            setAddedCustomer={setAddedCustomer}
           >
             <FormGridHeader>
               <FormInput
@@ -111,7 +119,11 @@ const Customers = () => {
             />
           </CustomerForm>
         }
+        
       />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000} />
     </div>
   );
 };

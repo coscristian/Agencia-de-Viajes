@@ -161,13 +161,6 @@ const SellersTable = ({ sellers, setShowTable }) => {
           <TableHeaderColumn text="Telefono" />
           <TableHeaderColumn text="Activo" />
           <TableHeaderColumn text="Info Trabajo" />
-          {/*
-          <TableHeaderColumn text="correo" />
-          <TableHeaderColumn text="Asignado por" />
-          <TableHeaderColumn text="Fecha Asignación" />
-          <TableHeaderColumn text="Fecha Inicio" />
-          <TableHeaderColumn text="Fecha Fin" />
-          */}
           <TableHeaderColumn text="Edit" />
         </TableHeader>
         <TableBody>

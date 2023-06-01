@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+
 const InformationLayout = ({
   tableTitle,
   buttonTableText,
@@ -38,17 +39,10 @@ const InformationLayout = ({
         </button>
       </div>
       {showTable ? table : form}
+
     </div>
   );
 };
 
 export default InformationLayout;
 
-/**
- * 
- *  <SidebarOption optionText="Filter By"/>
-      <SidebarOption optionText="Order by"/>
-      <li className="py-2 pl-6 pr-14 hover:bg-blue-900 rounded-3xl">
-        Order by
-      </li>
- */

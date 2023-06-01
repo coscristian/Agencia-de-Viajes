@@ -1,6 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const CustomerForm = (props) =>
   {
@@ -34,6 +35,7 @@ const CustomerForm = (props) =>
       axios.request(options).then(function (response) {
         console.log(response.data);
         props.setShowTable(true);
+        props.setAddedCustomer(true);
       }).catch(function (error) {
         console.error(error);
       });
