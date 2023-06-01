@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const SellerRow = ({ entity, setShowTable }) => {
-  const data = Object.values(entity);
+  const data = Object.keys(entity).map((key) => entity[key]);
   console.log(data);
   const [editar, setEditar] = useState(false);
 
@@ -9,41 +9,17 @@ const SellerRow = ({ entity, setShowTable }) => {
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       {editar ? (
         <>
-          <td>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              defaultValue={data[0]}
-            />
-          </td>
-          <td>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              defaultValue={data[1]}
-            />
-          </td>
-          <td>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              defaultValue={data[2]}
-            />
-          </td>
-          <td>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              defaultValue={data[3]}
-            />
-          </td>
-          <td>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              defaultValue={data[4]}
-            />
-          </td>
+          {
+            data.map(function (element) {
+              return <td>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="text"
+                  defaultValue={element}
+                />
+              </td>
+            })
+          }
         </>
       ) : (
         data.map((value) => {
@@ -77,10 +53,11 @@ const SellerRow = ({ entity, setShowTable }) => {
         </a>
       </td>
 
-      <td class="">
+      <td>
         <div className="flex w-full justify-around">
           {editar ? (
             <button type="submit">
+              Editar
               <i
                 onClick={() => setEditar(!editar)}
                 className="fas fa-check text-green-400 hover:text-green-800"
