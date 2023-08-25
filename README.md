@@ -1,5 +1,5 @@
 # Frontend Agencia de Viajes
-Este repositorio almacena el código Frontend realizado para el proyecto de la asignatura de Bases de datos
+Este repositorio almacena el código Frontend realizado para el proyecto de agencia de viajes
 ## Instalaciones necesarias 
 
 **NodeJs** el cual se puede encontrar una guía de instalación [aquí](https://nodejs.org/en/download/package-manager)
